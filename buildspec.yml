@@ -17,13 +17,11 @@ phases:
       - docker tag apache-dev-repo:latest $REPOSITORY_URI:latest
 
   post_build:
-    commands:
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - docker push $REPOSITORY_URI:latest
-      - printf '[{"name":"apache-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
+  commands:
+    - docker push $REPOSITORY_URI:$IMAGE_TAG
+    - docker push $REPOSITORY_URI:latest
+    - printf '[{"name":"apache-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 
 artifacts:
   files:
-    - imageDetail.json
-    - appspec.yml
-    - taskdef.json
+    - imagedefinitions.json
